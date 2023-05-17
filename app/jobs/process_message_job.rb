@@ -8,10 +8,10 @@ class ProcessMessageJob < ApplicationJob
 
     response_message.response = client.chat(
       parameters: {
-          model: "gpt-3.5-turbo", # Required.
-          messages: message.conversation.messages.where("id <= ?", message.id).map { |message|
-            { role: message.role, content: message.content }
-          }, # Required.
+        model: "gpt-3.5-turbo",
+        messages: message.conversation.messages.where("id <= ?", message.id).filter_map do |message|
+          { role: message.role, content: message.content } if message.content
+        end
       }
     )
 

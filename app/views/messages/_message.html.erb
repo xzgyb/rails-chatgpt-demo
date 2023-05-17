@@ -28,9 +28,7 @@
             processing...
           </div>
         <% elsif message.completed? %>
-          <div>
-            <%= message.content %>
-          </div>
+          <pre style="white-space:pre-wrap;word-wrap: break-word;"><%= message.content %></pre>
         <% else %>
           <div class="text-danger">
             Failed.
